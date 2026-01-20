@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Otaku Syndicate</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Otaku Syndicate — latest anime, search, news & schedules powered by AniList, ANN and SubsPlease" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/anime.svg" alt="logo" class="logo" />
+        <div>
+          <h1>Otaku Syndicate</h1>
+          <small>Your hub for trending anime, news & schedules</small>
+        </div>
+      </div>
+
+      <div id="user-info" class="user-info">
+        <div id="user-avatar-wrap">
+          <div class="skeleton avatar-skel" id="user-avatar-skel"></div>
+        </div>
+        <div class="user-name" id="user-name">Guest</div>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <button class="tab active" data-page="home">Home</button>
+      <button class="tab" data-page="search">Search</button>
+      <button class="tab" data-page="news">News</button>
+      <button class="tab" data-page="schedule">Schedule</button>
+    </nav>
+
+    <main class="container">
+      <!-- HOME / TRENDING -->
+      <section id="home" class="page">
+        <div class="section-header">
+          <h2>Trending & Latest</h2>
+          <div class="controls">
+            <label>Sort:
+              <select id="trending-sort">
+                <option value="TRENDING_DESC">Trending</option>
+                <option value="SCORE_DESC">Top Score</option>
+                <option value="POPULARITY_DESC">Popularity</option>
+                <option value="FAVOURITES_DESC">Favourites</option>
+              </select>
+            </label>
+            <button id="refresh-trending">Refresh</button>
+          </div>
+        </div>
+
+        <div id="trending-list" class="grid" aria-live="polite">
+          <!-- cards populated by JS. skeletons while loading -->
+        </div>
+      </section>
+
+      <!-- SEARCH -->
+      <section id="search" class="page hidden">
+        <div class="search-box">
+          <input id="search-input" type="search" placeholder="Search anime by name..." autocomplete="off" />
+          <div id="search-dropdown" class="dropdown hidden" role="listbox" aria-label="Search suggestions"></div>
+        </div>
+
+        <div id="search-results" class="grid" aria-live="polite"></div>
+      </section>
+
+      <!-- NEWS -->
+      <section id="news" class="page hidden">
+        <div class="section-header">
+          <h2>Anime News (Anime News Network)</h2>
+          <div class="controls">
+            <button id="refresh-news">Refresh</button>
+          </div>
+        </div>
+        <div id="news-list" class="list"></div>
+      </section>
+
+      <!-- SCHEDULE -->
+      <section id="schedule" class="page hidden">
+        <div class="section-header">
+          <h2>Schedule (SubsPlease)</h2>
+          <div class="controls">
+            <label>Source timezone:
+              <select id="source-timezone">
+                <!-- populated by JS -->
+              </select>
+            </label>
+            <label>Your timezone:
+              <select id="target-timezone">
+                <!-- populated by JS -->
+              </select>
+            </label>
+            <button id="today-btn">Today's Schedule</button>
+            <button id="week-btn">Weekly Schedule</button>
+          </div>
+        </div>
+
+        <div id="schedule-content" class="list">
+          <!-- schedule items here -->
+        </div>
+        <div class="note muted small">
+          Note: SubsPlease/website endpoints may block direct browser requests (CORS). If some content doesn't load, deploy a small proxy (Cloudflare Worker / Netlify function / Vercel serverless) to forward requests.
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal for anime details -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-panel" role="document" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
+        <div id="modal-body">
+          <!-- content filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <small>Built with AniList, ANN RSS & SubsPlease • Designed for Telegram Web App integration</small>
+    </footer>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+name = "otaku-syndicate-proxy"
+main = "src/index.js"
+compatibility_date = "2026-01-20"
+
+# Optional: set account_id after running `npx wrangler login` (or leave blank and wrangler will use your logged-in account)
+# account_id = "your-account-id"
